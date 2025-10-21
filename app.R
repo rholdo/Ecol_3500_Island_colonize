@@ -73,8 +73,8 @@ server <- function(input, output) {
         annotate("point", x = 0, y = 10, size = 20, color = 'gray', alpha = 0.5) +
         annotate("point", x = 0, y = 25, size = 20, color = 'gray', alpha = 0.5) +
         annotate("point", x = 0, y = 40, size = 20, color = 'gray', alpha = 0.5) +
-        annotate("text", x = 0, y = 10, label = 'C') +
-        annotate("text", x = 0, y = 25, label = 'M') +
+        annotate("text", x = 0, y = 10, label = 'N') +
+        annotate("text", x = 0, y = 25, label = 'I') +
         annotate("text", x = 0, y = 40, label = 'F')
     })
   })
