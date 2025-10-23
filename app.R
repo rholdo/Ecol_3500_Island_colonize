@@ -5,8 +5,8 @@ library(ggforce)
 library(dplyr)
 library(tidyr)
 
-col <- function(alpha, sp){
-  SP <- sp # Number of species
+col <- function(alpha){
+  SP <- 10 # Number of species
   maxT <- 100 # Number of time steps
   X <- matrix(0, nrow = maxT, ncol = SP) # Matrix of X positions
   Y <- X
@@ -51,8 +51,6 @@ ui <- fluidPage(
       sidebarPanel(
         sliderInput("tor", "Tortuosity:",
                     min = 0, max = 0.2, value = 0),
-        sliderInput("sp", "# species",
-                    min = 5, max = 20, value = 10),
         actionButton("run", "Colonize!")
       ),
       mainPanel(
@@ -64,14 +62,13 @@ ui <- fluidPage(
 # Define server logic required to draw a histogram
 server <- function(input, output) {
   observeEvent(input$run, {
-    df <- col(input$tor, input$sp)
+    df <- col(input$tor)
     output$colPlot <- renderPlot({
-      ggplot(df) + geom_path(aes(x=X, y=Y, color=SP)) +
+      ggplot(df) + geom_path(aes(x=X, y=Y, color=SP), size = 2) +
         coord_fixed(ratio = 1) +
         xlim(-49,49) +
         ylim(1,49) +
         theme_bw() +
-        theme(legend.position = "none") +
         annotate("point", x = 0, y = 10, size = 20, color = 'gray', alpha = 0.5) +
         annotate("point", x = 0, y = 25, size = 20, color = 'gray', alpha = 0.5) +
         annotate("point", x = 0, y = 40, size = 20, color = 'gray', alpha = 0.5) +
